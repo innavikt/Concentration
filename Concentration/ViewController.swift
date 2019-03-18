@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         }
     }
     
-    var emojiChoises = ["👻", "🎃", "☃️", "🌈", "🦇", "🕷", "🧙‍♀️"]
+    var emojiChoises = "👻🎃☃️🌈🦇🕷🧙‍♀️"
 
     @IBOutlet private weak var flipCountLabel: UILabel!
     
@@ -58,16 +58,16 @@ class ViewController: UIViewController {
         }
     }
     
-    private var emoji = Dictionary<Int, String>()
+    private var emoji = Dictionary<Card, String>()
     
     private func emoji(for card: Card) -> String {
-        if emoji[card.identifier] == nil, emojiChoises.count > 0 {
-            let randomIndex = emojiChoises.count.arc4random
-            emoji[card.identifier] = emojiChoises.remove(at: randomIndex)
+        if emoji[card] == nil, emojiChoises.count > 0 {
+            let randomIndex = emojiChoises.index(emojiChoises.startIndex, offsetBy: emojiChoises.count.arc4random)
+            emoji[card] = String(emojiChoises.remove(at: randomIndex))
         }
         
-        if emoji[card.identifier] != nil {
-            return emoji[card.identifier]!
+        if emoji[card] != nil {
+            return emoji[card]!
         } else {
             return "?"
         }

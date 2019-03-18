@@ -41,7 +41,7 @@ class Concentration {
             if let matchIndex = indexOfOneAndOnlyFaceUpCard,
                 matchIndex != index {
                 //check if matched
-                if cards[matchIndex].identifier == cards[index].identifier {
+                if cards[matchIndex] == cards[index]{
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
                 }
@@ -54,7 +54,7 @@ class Concentration {
     }
     
     init(numberOfPairOfCards: Int) {
-        assert(numberOfPairOfCards > 0, "Concentration.init((\(numberOfPairOfCards)): you must have at least one pair of cards")
+        assert(numberOfPairOfCards > 0, "Concentration.init(\(numberOfPairOfCards)): you must have at least one pair of cards")
         for _ in 0..<numberOfPairOfCards {
             let card = Card()
             cards += [card, card]
