@@ -23,13 +23,28 @@ class ViewController: UIViewController {
     
     private(set) var flipCount = 0 {
         didSet {
-            flipCountLabel.text = "Flip count: \(flipCount)"
+            updateFlipCountLabel()
         }
+    }
+    
+    
+    private func updateFlipCountLabel() {
+        let  attributes: [NSAttributedString.Key : Any] = [
+            .strokeWidth : 1,
+            .strokeColor: UIColor.purple
+        ]
+        let attributedString = NSAttributedString(string: "Flips: \(flipCount)", attributes: attributes)
+        
+        flipCountLabel.attributedText = attributedString
     }
     
     var emojiChoises = "👻🎃☃️🌈🦇🕷🧙‍♀️"
 
-    @IBOutlet private weak var flipCountLabel: UILabel!
+    @IBOutlet private weak var flipCountLabel: UILabel! {
+        didSet {
+            updateFlipCountLabel()
+        }
+    }
     
     @IBOutlet private var cardButtons: [UIButton]!
     
