@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ConcentrationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,6 @@ class ViewController: UIViewController {
         flipCountLabel.attributedText = attributedString
     }
     
-    var emojiChoises = "👻🎃☃️🌈🦇🕷🧙‍♀️"
 
     @IBOutlet private weak var flipCountLabel: UILabel! {
         didSet {
@@ -60,15 +59,17 @@ class ViewController: UIViewController {
     }
     
     private func updateViewFromModel() {
-        for index in cardButtons.indices {
-            let button = cardButtons[index]
-            let card = game.cards[index]
-            if card.isFaceUp {
-                button.setTitle(emoji(for: card), for: .normal)
-                button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            } else {
-                button.setTitle("", for: .normal)
-                button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 0.1212199505, green: 0.1653521473, blue: 1, alpha: 1)
+        if cardButtons != nil {
+            for index in cardButtons.indices {
+                let button = cardButtons[index]
+                let card = game.cards[index]
+                if card.isFaceUp {
+                    button.setTitle(emoji(for: card), for: .normal)
+                    button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                } else {
+                    button.setTitle("", for: .normal)
+                    button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 0.5600357782, green: 0.6927751188, blue: 1, alpha: 1)
+                }
             }
         }
     }
@@ -85,6 +86,16 @@ class ViewController: UIViewController {
             return emoji[card]!
         } else {
             return "?"
+        }
+    }
+    
+    var emojiChoises = "👻🎃☃️🌈🦇🕷🧙‍♀️"
+    
+    var theme: String? {
+        didSet {
+            emojiChoises = theme ?? ""
+            emoji = [:] //reset
+            updateViewFromModel()
         }
     }
     
