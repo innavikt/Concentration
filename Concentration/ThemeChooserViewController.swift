@@ -8,7 +8,11 @@
 
 import UIKit
 
-class ThemeChooserViewController: UIViewController {
+class ThemeChooserViewController: VCLLogingViewController {
+    
+    override var vclLoggingName: String {
+        return "Theme"
+    }
     
     let themes = [
         "Sports" :  "🏄🏻‍♀️🤽🏻‍♀️🚴🏻‍♀️🏊🏻‍♀️🏋🏻‍♂️🏇🏻⛷🏸🏎🏌🏻‍♂️",
